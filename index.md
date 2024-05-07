@@ -8,7 +8,7 @@ title: Things I've Built
     <div class="col">
       <div class="card">
           <div class="card-body">
-              <a href="{{ post.url }}">
+              <a href="/about/{{ post.url }}">
                 <h5>{{ post.title }}</h5>
                 <p class="card-text">
                       {{ post.excerpt }}
