@@ -1,3 +1,7 @@
-theme: minima
-title: About Matt Gauzza
+remote_theme: jekyll/minima
+plugins:
+  - jekyll-remote-theme
+minima:
+  skin: dark 
+title: Doing
 author: Matt Gauzza
