@@ -3,7 +3,7 @@ title: "Making Bags From Trash"
 date: 2018-04-15
 ---
 
-![alt text](/assets/images/grain-bags-00.jpg)
+![alt text](/about/assets/images/grain-bags-00.jpg)
 
 
 ![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg
