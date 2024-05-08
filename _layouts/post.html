@@ -11,7 +11,7 @@ layout: default
         {{ page.date | date: date_format }}
       </time>
       {%- if page.author -%}
-        • {{ page.author }}
+      • {{ page.author }}
       {%- endif -%}
     </p>
   </header>
@@ -20,5 +20,7 @@ layout: default
     {{ content }}
   </section>
   <hr />
-  {% include post_tags.html %}
+  <div class="my-3">
+    {% include post_tags.html %}
+  </div>
 </article>
