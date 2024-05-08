@@ -15,7 +15,7 @@ title: Things I've Built
                 </p>
                 <span>
                 {% for tag in page.tags %}
-                  <a href="/about/tag_index/#{{ tag | slugify }}" class="badge bg-primary">
+                  <a href="/about/tag_index#{{ tag | slugify }}" class="badge bg-primary">
                       <span class="fas fa-tag" aria-hidden="true"></span> {{ tag }}
                   </a>
                 {% endfor %}
