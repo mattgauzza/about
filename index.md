@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: Things I've Built
 ---
 
@@ -13,6 +13,13 @@ title: Things I've Built
                 <p class="card-text">
                       {{ post.excerpt }}
                 </p>
+                <span>
+                {% for tag in page.tags %}
+                  <a href="/tag_index/#{{ tag | slugify }}" class="badge bg-primary">
+                      <span class="fas fa-tag" aria-hidden="true"></span> {{ tag }}
+                  </a>
+                {% endfor %}
+              </span>
               </a>
           </div>
       </div>
