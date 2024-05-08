@@ -1,7 +1,7 @@
 theme: minima
 minima:
   skin: dark 
-title: Doing
+title: Thoughts &amp; Ideas 
 author: Matt Gauzza
 exclude:
   - Gemfile
