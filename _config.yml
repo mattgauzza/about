@@ -1,7 +1,7 @@
 theme: minima
 minima:
   skin: dark 
-title: Thoughts &amp; Ideas 
+title: Thoughts & Ideas 
 author: Matt Gauzza
 exclude:
   - Gemfile
