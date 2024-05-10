@@ -12,10 +12,12 @@
           {{ content }}
       </div>
     </div>
+    {% if !page.hideMainTags %}
     <hr>
     <div class="my-3 container">
       {% include all_tags.html %}
     </div>
+    {% endif %}
     {%- include footer.html -%}
 
   </body>
