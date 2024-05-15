@@ -21,13 +21,14 @@ title: Things I've Built
                 </a>
               {% endfor %}
               </span>
-              <div class="mt-auto">
-                 <a href="/about/{{ post.url }}" class="btn btn-link">
-                 Read More <i class="fa fa-caret-right"></i>
-                 </a>
-              </div>
+          </div>
+          <div class="card-footer p-3 d-flex justify-content-between">
+            <a href="/about/{{ post.url }}" class="btn btn-link ml-auto">
+            Read More <i class="fa fa-caret-right"></i>
+            </a>
           </div>
       </div>
     </div>
   {% endfor %}
 </div>
+
