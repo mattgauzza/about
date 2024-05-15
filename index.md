@@ -12,7 +12,7 @@ title: Things I've Built
                 <h5>{{ post.title }}</h5>
               </a>
               <p class="card-text">
-                      {{ post.excerpt }}
+                    {{ post.excerpt }}
               </p>
               <span>
               {% for tag in page.tags %}
@@ -21,6 +21,11 @@ title: Things I've Built
                 </a>
               {% endfor %}
               </span>
+              <div class="mt-auto">
+                 <a href="/about/{{ post.url }}" class="btn btn-link">
+                 Read More <i class="fa fa-caret-right"></i>
+                 </a>
+              </div>
           </div>
       </div>
     </div>
