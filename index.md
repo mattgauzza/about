@@ -3,11 +3,14 @@ layout: default
 title: Things I've Built
 ---
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="main-timeline">
+{% assign postIndex = 0 %}
   {% for post in site.posts %}
-    <div class="col">
-      <div class="card h-100 cursor-pointer" onclick="window.location.href='/about/{{ post.url }}'">
+    <div class="timeline {% if postIndex | modulo: 2 %} left {% else %} right {% endif %}">
+      <div class="card h-100 cursor-pointer" 
+        onclick="window.location.href='/about/{{ post.url }}'">
           <div class="card-body">
+              {{ post.date }}
               <a href="/about/{{ post.url }}" class="text-normal">
                 <h5>{{ post.title }}</h5>
               </a>
@@ -29,6 +32,7 @@ title: Things I've Built
           </div>
       </div>
     </div>
+     {% assign postIndex = postIndex | plus:1 %}
   {% endfor %}
 </div>
 
