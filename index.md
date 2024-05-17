@@ -10,8 +10,7 @@ title: Things I've Built
   {% for post in site.posts %}
    {% assign indexRemainder = forloop.index | modulo: 2 %}
     <div class="timeline {% if indexRemainder == 0 %} right {% else %} left {% endif %}">
-    {% assign currentPost = post %}
-    {% include post_card.html %}
+    {% include post_card.html currentPost=post %}
       <div class="card h-100 cursor-pointer" 
         onclick="window.location.href='/about/{{ post.url }}'">
           <div class="card-body">
