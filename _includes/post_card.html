@@ -1,0 +1,23 @@
+<div class="card h-100 cursor-pointer" onclick="window.location.href='/about/{{ site.currentPost.url }}'">
+  <div class="card-body">
+    {{ site.currentPost.date | date: "%-d %B %Y" }}
+    <a href="/about/{{ site.currentPost.url }}" class="text-normal">
+      <h5>{{ site.currentPost.title }}</h5>
+    </a>
+    <p class="card-text">
+      {{ site.currentPost.excerpt }}
+    </p>
+    <span>
+      {% for tag in page.tags %}
+      <a href="/about/tag_index#{{ tag | slugify }}" class="badge bg-primary">
+        <span class="fas fa-tag" aria-hidden="true"></span> {{ tag }}
+      </a>
+      {% endfor %}
+    </span>
+  </div>
+  <div class="card-footer p-3 d-flex justify-content-between">
+    <a href="/about/{{ site.currentPost.url }}" class="btn btn-link ml-auto">
+      Read More <i class="fa fa-caret-right"></i>
+    </a>
+  </div>
+</div>
