@@ -6,7 +6,8 @@ title: Things I've Built
 <div class="main-timeline">
 {% assign postIndex = 0 %}
   {% for post in site.posts %}
-    <div class="timeline {% if postIndex | modulo: 2 %} left {% else %} right {% endif %}">
+  {{forloop.index}}
+    <div class="timeline {% if forloop.index | modulo: 2 %} left {% else %} right {% endif %}">
       <div class="card h-100 cursor-pointer" 
         onclick="window.location.href='/about/{{ post.url }}'">
           <div class="card-body">
