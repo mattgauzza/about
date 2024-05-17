@@ -10,7 +10,7 @@ title: Things I've Built
       <div class="card h-100 cursor-pointer" 
         onclick="window.location.href='/about/{{ post.url }}'">
           <div class="card-body">
-              {{ post.date }}
+              {{ post.date | date: "%-d %B %Y"  }}
               <a href="/about/{{ post.url }}" class="text-normal">
                 <h5>{{ post.title }}</h5>
               </a>
