@@ -8,7 +8,7 @@
       {{ include.currentPost.excerpt }}
     </p>
   </div>
-  <div class="card-footer p-3 d-flex justify-content-between">
+  <div class="card-footer p-3 d-flex justify-content-between align-items-center">
     <div>
       {% for tag in post.tags %}
       <a href="/about/tag_index#{{ tag | slugify }}" class="badge bg-primary">
