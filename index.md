@@ -9,7 +9,7 @@ title: Things I've Built
 {% assign postIndex = 0 %}
   {% for post in site.posts %}
     {% assign indexRemainder = forloop.index | modulo: 2 %}
-    <div class="timeline {% if indexRemainder == 0 %} right {% else %} left text-end {% endif %}">
+    <div class="timeline {% if indexRemainder == 0 %} right {% else %} left text-lg-end {% endif %}">
     {% include post_card.html currentPost=post %}
     </div>
      {% assign postIndex = postIndex | plus:1 %}
