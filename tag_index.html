@@ -39,6 +39,7 @@ description: Tags written about on this webpage.
         </h3>
         <div class="main-timeline">
             {% for post in site.tags[tag] %}
+            {% assign indexRemainder = forloop.index | modulo: 2 %}
             <div class="timeline {% if indexRemainder == 0 %} right {% else %} left {% endif %}">
                 {% include post_card.html currentPost=post %}
             </div>
