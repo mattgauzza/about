@@ -1,6 +1,5 @@
-<div class="card h-100 cursor-pointer" 
-  onclick="window.location.href='/about/{{ include.currentPost.url }}'">
-  <div class="card-body">
+<div class="card h-100 cursor-pointer">
+  <div class="card-body" onclick="window.location.href='/about/{{ include.currentPost.url }}'">
     {{ include.currentPost.date | date: "%-d %B %Y" }}
     <a href="/about/{{ include.currentPost.url }}" class="text-normal">
       <h5>{{ include.currentPost.title }}</h5>
@@ -8,15 +7,15 @@
     <p class="card-text">
       {{ include.currentPost.excerpt }}
     </p>
-    <span>
+  </div>
+  <div class="card-footer p-3 d-flex justify-content-between">
+    <div>
       {% for tag in post.tags %}
       <a href="/about/tag_index#{{ tag | slugify }}" class="badge bg-primary">
         <span class="fas fa-tag" aria-hidden="true"></span> {{ tag }}
       </a>
       {% endfor %}
-    </span>
-  </div>
-  <div class="card-footer p-3 d-flex justify-content-between">
+    </div>
     <a href="/about/{{ include.currentPost.url }}" class="btn btn-link ml-auto">
       Read More <i class="fa fa-caret-right"></i>
     </a>
