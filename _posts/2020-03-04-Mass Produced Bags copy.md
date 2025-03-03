@@ -2,6 +2,7 @@
 title: "Mass Produced Bags"
 date: 2020-03-04
 layout: post
+excerpt: I was able to finish my "mass production" of upcycled reusable grocery bags. There are 20 bags in total. On average it took me about 1 1/2 hours per bag.
 tags:
 - recycling
 - bags
