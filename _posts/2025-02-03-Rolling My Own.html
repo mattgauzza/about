@@ -1,0 +1,65 @@
+---
+Title: "Rolling My Own: Why I Chose Firebase for Embeddings"
+Date: 2025-02-03
+Layout: post
+Tags:
+- Empirical
+- AI
+- Embeddings
+- Learning
+- Research
+- OpenAI
+- Cosine Search
+- DIY
+- Firebase
+---
+<div class="container my-5">
+    <h1 class="mb-4">Rolling My Own: Why I Chose Firebase for Embeddings</h1>
+    <p><strong>Date:</strong> 2025-03-03</p>
+    <p><strong>Tags:</strong> Firebase, Firestore, Embeddings, DIY</p>
+  
+    <div class="row my-4">
+      <div class="col-12">
+        <p>
+          As I was building Empirical, I realized that embeddings could be the key to maintaining context in conversations and interactions. But the question was: where do I store them? After looking into some third-party solutions, I ultimately decided to roll my own and use Firebase Firestore for storing the embeddings. Here’s why:
+        </p>
+  
+        <h3 class="mt-4">1. Simplicity and Familiarity</h3>
+        <p>
+          I’m already using Firebase for other parts of the app, so it made sense to leverage Firestore for storing embeddings too. It’s a simple, easy-to-use cloud database that integrates seamlessly with my existing setup. Firebase's real-time syncing features are also a bonus, as they allow the assistant to stay up to date on any changes in context as soon as they happen. I don’t need to learn a new tool or service, which keeps things fast and efficient.
+        </p>
+  
+        <h3 class="mt-4">2. Cost-Effective for Early Stages</h3>
+        <p>
+          Many of the dedicated vector databases or third-party services for embeddings come with a hefty price tag. While they may offer advanced features or scale better, they often come with costs that are overkill for an early-stage project like Empirical. Firebase Firestore, on the other hand, offers a generous free tier and scales as you need it to. Since I’m not dealing with massive amounts of data (at least, not yet), it’s a much more cost-effective solution for the time being.
+        </p>
+  
+        <h3 class="mt-4">3. Scalability</h3>
+        <p>
+          One of the main reasons I chose Firebase is its ability to scale easily as my app grows. Firestore is designed for both small and large applications, and since it’s a fully managed solution, I don’t have to worry about managing infrastructure or databases. If Empirical grows and the volume of stored embeddings increases, Firestore can handle that growth without me needing to migrate to a new system.
+        </p>
+  
+        <h3 class="mt-4">4. Integration with Other Firebase Services</h3>
+        <p>
+          Since I’m already using Firebase Auth and Firestore for the app, keeping everything in one ecosystem means smooth integration. I can easily tie the embeddings to the specific users and data already stored in Firebase. This also simplifies security and permission management, as I can control who has access to the data in one place.
+        </p>
+  
+        <h3 class="mt-4">5. Flexible Querying and Simple Search</h3>
+        <p>
+          While Firestore doesn’t offer vector-based search out-of-the-box, I can still perform efficient queries with it by storing the embeddings as arrays and doing cosine similarity comparisons in the backend. For my current needs, this is a simple and effective approach that doesn’t require me to adopt a more complex search engine. It gives me the flexibility to optimize how I store and retrieve embeddings without being locked into a rigid database schema.
+        </p>
+  
+        <h3 class="mt-4">6. Future-Proofing</h3>
+        <p>
+          Although Firestore is not a vector database like Pinecone, I can always integrate additional tools in the future if necessary. By using Firebase now, I don’t lock myself into a specific database vendor. If my needs evolve, I can add more sophisticated indexing or use specialized services later without worrying about migrating all my data.
+        </p>
+  
+        <hr>
+  
+        <h3 class="mt-4">In Conclusion</h3>
+        <p>
+          In conclusion, rolling my own embedding storage solution with Firebase makes sense for Empirical at this stage. It’s easy to set up, cost-effective, and scales well as the app grows. Plus, it fits perfectly within my existing Firebase ecosystem, making it a seamless choice for this project. As Empirical matures, I’ll reassess whether I need to adopt more advanced solutions, but for now, Firebase is ticking all the boxes.
+        </p>
+      </div>
+    </div>
+  </div>

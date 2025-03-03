@@ -1,0 +1,71 @@
+---
+title: "Migrating to MVC from ASP.NET Forms"
+date: 2021-04-01
+layout: post
+excerpt: <img src="/about/assets/images/Screenshot 2024-05-21 093653.webp" alt="poor google core web vitals score"
+  class="img-fluid">
+tags:
+- tech debt
+- ecommerce
+- MVC
+- software engineering
+- Product Management
+---
+<div class="p-3 border rounded mb-4 me-md-5 col-md-6 float-start px-4">
+  <img src="/about/assets/images/Screenshot 2024-05-21 093653.webp" alt="poor google core web vitals score"
+    class="img-fluid rounded">
+</div>
+<h3>Why?</h3>
+<p>
+  Currently our devs are dying with old poorly written and untestable ASP.NET forms front end code. We are currently tried to a view engine called
+  Spark View Engine which is no longer maintained or supported. This library is also preventing us from upgrading our version of ASP.NET. 
+  After a long time of researching our way out of this seemingly unsurmountable mountain of tech debt for our small dev teams
+  I believe I have found a (long and slow) way forward.
+</p>
+<h3>How?</h3>
+<p>
+  The first key to this was to be able to upgrade Spark. It's intertwined too tightly and contains too much business logic in UI for us to replace in a timely manner.
+  Pulling down the repro we were able to get .net version upgrade which opened up an avenue for us to use MVC and razor engine. Finding the following code
+  was the second key to allowing us to make progress:
+</p>
+<ul>
+
+  <li>Relying on an unsupported, outdated and slow view binding software
+    Spark View Engine which was used prior to MVC.</li>
+
+  <li>Over engineered, overly complex, poorly written javascript that is full of business rules that should be relocated
+    to code. </li>
+  <li>Too much custom CSS.</li>
+  <li>Improperly compressed images.</li>
+  <li>Outdated design ideas that led to bad designs and poor overhead</li>
+  <li>
+    Relient on VB.NET forms for front end technology which have code behinds that are full of untestable business logic.
+  </li>
+</ul>
+<p>
+  This tech debt is causing the sites to perform poorly according to Google's new Core Web Vitals measurements.
+  Which in turn could cause Google to delist the sites.
+  All of this spaghetti code often makes it extremely difficult to add new features and a
+  headache to debug / fix existing code.
+</p>
+<h3>What to do?</h3>
+<p>
+  We have a very small development team so it is extremely hard and only getting harder.
+  I am going to develop a roadmap to help this company get out of their tech debt and put them on a path
+  to be more successful.
+</p>
+<p>
+  Many pages will have to be fully rewritten from scratch and streamlined from business logic.
+  There are many low hanging fruits that can be plucked to help in the short term raise the Lighthouse score.
+  According to Google:
+</p>
+<p>
+  A high Lighthouse score means that your website is fast, accessible, and user-friendly, which can lead to better
+  engagement and more conversions. Secondly, Lighthouse scores are used by search engines like Google to determine where
+  your website ranks in search results.
+</p>
+<h3>TL;DR;</h3>
+<p>
+  Hard to argue with getting deranked on google and common sense changes that can lead to more conversion and
+  engagement.
+</p>
