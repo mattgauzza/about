@@ -11,6 +11,6 @@ I would like to figure out how to organize and group these posts better. The fir
 
 After a quick little Google search, I found the following article
 
-https://peterroelants.github.io/posts/adding-tags-to-github-pages/
+<https://peterroelants.github.io/posts/adding-tags-to-github-pages/>
 
 this Looks easy enough to implement.
