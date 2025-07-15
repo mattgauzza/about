@@ -10,6 +10,11 @@
 $web-font-path: "https://fonts.googleapis.com/css?family=sans_serif" !default;
 @import url($web-font-path);
 
+:root {
+  --mdb-body-font-family: ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
 // Navbar ======================================================================
 
 .navbar {
@@ -384,5 +389,16 @@ legend {
   h5,
   h6 {
     color: inherit;
+  }
+}
+
+.post-content {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 2rem !important;
   }
 }
