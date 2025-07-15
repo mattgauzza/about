@@ -7,12 +7,16 @@
 
 // Variables ===================================================================
 
-$web-font-path: "https://fonts.googleapis.com/css?family=sans_serif" !default;
+$web-font-path: "https://fonts.googleapis.com/css?family=Ubuntu" !default;
 @import url($web-font-path);
 
 :root {
-  --mdb-body-font-family: ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --mdb-body-font-family: var(--aw-font-sans, ui-sans-serif), ui-sans-serif,
+    system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --aw-font-sans: "Ubuntu";
+  --aw-font-serif: "Ubuntu";
+  --aw-font-heading: "Ubuntu";
 }
 
 // Navbar ======================================================================
