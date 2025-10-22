@@ -1,0 +1,177 @@
+---
+title: "Beyond Context Windows: Building an LLM with Injectable Layers"
+date: 2025-10-22
+layout: post
+excerpt: What if an AI didn’t need to be fed massive prompts every time it responded? What if context wasn’t passed
+in—but *part* of the model itself?
+tags:
+- AI
+- architecture
+- prompt engineering
+- context
+- software design
+---
+
+<p>Most large language models today — GPT, Claude, Gemini, whatever — are brilliant, but fundamentally
+    <em>stateless</em>. Every time we talk to them, we shovel in context: business rules, data schemas, Markdown files,
+    embeddings, etc. The LLM doesn’t “remember” anything unless we feed it again. That’s expensive, slow, and
+    cognitively inefficient.</p>
+
+<p>What if we could architect something different?</p>
+
+<hr>
+
+<h2>The Idea: Injectable Layers on Top of a Base LLM</h2>
+
+<p>Imagine a base model like GPT-5 or Claude 3, but with a <strong>modular, cloud-based layer system</strong> sitting on
+    top. Each “layer” injects persistent context into the model — not through prompts, but through direct, addressable
+    access at inference time.</p>
+
+<p>Think of it like building an <em>operating system for intelligence</em>.</p>
+
+<ul>
+    <li>The base LLM is the kernel.</li>
+    <li>Businesses (or users) can mount “drives” of context — authentication, business rules, live databases, knowledge
+        bases, Markdown skill files, etc.</li>
+    <li>The LLM can reference those drives dynamically, without having to re-ingest their contents every time.</li>
+</ul>
+
+<p>This architecture breaks the dependence on token limits. Instead of packing context windows with giant prompts, the
+    model queries context objects, much like an application hitting APIs or memory.</p>
+
+<hr>
+
+<h2>The Conceptual Architecture</h2>
+
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card-group">
+                <div class="card mx-2 shadow-sm border-primary">
+                    <div class="card-body text-center">
+                        <h3>Cloud Layer</h3>
+                        <p>Business Rules<br>Authentication / ACL<br>Data Connectors<br>Markdown Skill Files<br>Dynamic
+                            Knowledge Maps</p>
+                    </div>
+                </div>
+
+                <div class="card mx-2 shadow-sm border-info">
+                    <div class="card-body text-center">
+                        <h3>Context Gateway</h3>
+                        <p>Handles Model Queries<br>Routes to Right LLM<br>Resolves External Data<br>Injects Metadata
+                            Hooks</p>
+                    </div>
+                </div>
+
+                <div class="card mx-2 shadow-sm border-success">
+                    <div class="card-body text-center">
+                        <h3>Base LLM(s)</h3>
+                        <p>GPT / Claude / Mistral<br>Task-Routed Dynamically<br>Stateless Core Models</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <p>Cloud Layer → Context Gateway → Base LLM(s)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<h3>1. Context as Mounted Memory</h3>
+
+<p>Instead of stuffing all your context into each prompt, the model can <em>mount</em> context sources like drives. They
+    live externally but are addressable by a persistent symbolic link (like <code>/biz/rules/hr</code> or
+    <code>/db/reports/monthly</code>).</p>
+
+<hr>
+
+<h3>2. Separation of Intelligence and Knowledge</h3>
+
+<p>The LLM handles reasoning, structure, and linguistic intelligence. The context layers hold <em>truth</em> — data,
+    policy, documentation. The LLM becomes the “brain,” the layers become its “memory cortex.”</p>
+
+<hr>
+
+<h3>3. Skill Injection via Markdown</h3>
+
+<p>Instead of retraining models, businesses can author Markdown skill files:</p>
+
+<pre><code># Skill: Generate Monthly Report
+## Description
+Produces a financial summary for the given date range.
+
+## Steps
+1. Query `/db/finance/reports?period={month}`
+2. Format as a markdown table
+3. Annotate insights
+</code></pre>
+
+<p>The model parses these dynamically. Skills can be versioned, swapped, or revoked instantly — like micro-plugins.</p>
+
+<hr>
+
+<h3>4. Live Data Streams</h3>
+
+<p>Rather than embedding snapshots of data, this system could use “live connectors” — lightweight adapters that pull
+    from databases or APIs in real time. The model never <em>owns</em> the data; it just reads from it securely.</p>
+
+<hr>
+
+<h3>5. LLM Routing Layer</h3>
+
+<p>Why stop at one model? A routing layer can benchmark task types and select the right engine:</p>
+
+<ul>
+    <li>GPT for creativity</li>
+    <li>Claude for analysis</li>
+    <li>Mistral for coding</li>
+    <li>Llama for local offline tasks</li>
+</ul>
+
+<p>You can even hybridize — GPT plans the query, Claude interprets results, Mistral executes structured code.</p>
+
+<hr>
+
+<h2>How It Would Feel to Use</h2>
+
+<p>Imagine asking:</p>
+
+<blockquote>
+    <p>“Generate a weekly team summary using yesterday’s sprint board and highlight blockers.”</p>
+</blockquote>
+
+<p>You don’t send the sprint board data — the LLM already has access via <code>/jira/boards/sprint-42</code>. It
+    queries, summarizes, formats, and outputs your report instantly.</p>
+
+<p>No long prompt. No lost context. No data leakage. Just reasoning.</p>
+
+<hr>
+
+<h2>Why This Matters</h2>
+
+<p>This kind of LLM system would be:</p>
+
+<ul>
+    <li><strong>Composable:</strong> Plug in or detach capabilities like Lego bricks.</li>
+    <li><strong>Persistent:</strong> Context lives <em>with</em> the LLM layer, not inside prompts.</li>
+    <li><strong>Secure:</strong> Data stays behind gateways with policy-based access.</li>
+    <li><strong>Efficient:</strong> No re-tokenizing gigabytes of context on every run.</li>
+</ul>
+
+<p>It’s the natural next step toward <em>real artificial reasoning systems</em> — ones that operate with <em>persistent,
+        structured, and dynamic memory</em>.</p>
+
+<hr>
+
+<h2>Closing Thought</h2>
+
+<p>LLMs today are like geniuses with amnesia. They can reason incredibly well but forget everything after each
+    conversation.</p>
+
+<p>An injectable-layer architecture would give them long-term structure — a way to know <em>where</em> to find truth,
+    not just <em>how</em> to talk about it.</p>
+
+<p>That’s how we move from <em>prompt engineering</em> to <em>knowledge orchestration</em>.</p>
