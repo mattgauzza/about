@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}" data-mdb-theme="dark">
+<html lang="{{ page.lang | default: site.lang | default: " en" }}" data-mdb-theme="dark">
 
-  {%- include head.html -%}
+{%- include head.html -%}
 
-  <body>
+<body>
 
-    {%- include header.html -%}
+  {%- include header.html -%}
 
-    <div class="py-2">
-      <div class="container page-content">
-          {{ content }}
-      </div>
+  <div class="py-2">
+    <div class="container page-content">
+      {{ content }}
     </div>
-    {% if !page.hideMainTags %}
-    <hr>
-    <div class="my-3 container">
-      {% include all_tags.html %}
-    </div>
-    {% endif %}
-    {%- include footer.html -%}
+  </div>
+  {% if page.hideMainTags != true %}
+  <hr>
+  <div class="my-3 container">
+    {% include all_tags.html %}
+  </div>
+  {% endif %}
+  {%- include footer.html -%}
 
-  </body>
+</body>
 
 </html>
