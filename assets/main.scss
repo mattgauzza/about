@@ -63,6 +63,17 @@ code {
   text-align: center;
 }
 
+/* Inline code (badge-like) */
+.container.page-content code {
+  display: inline-block;
+  background: #2ea1a1;
+  color: #fff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  margin-right: 0.35rem;
+  font-size: 0.9rem;
+}
+
 /* Code blocks inside <pre> should be full-width, monospaced and scrollable.
    Make the selector more specific so it overrides the inline-code pill styles. */
 .container.page-content pre,
