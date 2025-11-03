@@ -45,7 +45,7 @@ hr {
 
 pre,
 code {
-  background-color: #f1f3f5;
+  background-color: #333;
   padding: 0.25rem 0.4rem;
   border-radius: 0.25rem;
 }
@@ -63,6 +63,7 @@ code {
   text-align: center;
 }
 
+/* Inline code (badge-like) */
 .container.page-content code {
   display: inline-block;
   background: #2ea1a1;
@@ -71,6 +72,20 @@ code {
   border-radius: 999px;
   margin-right: 0.35rem;
   font-size: 0.9rem;
+}
+
+/* Code blocks inside <pre> should be full-width, monospaced and scrollable.
+   Make the selector more specific so it overrides the inline-code pill styles. */
+.container.page-content pre,
+.container.page-content pre code {
+  display: block;
+  background: #333; /* light neutral block background */
+  color: inherit;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  white-space: pre;
+  font-family: monospace;
 }
 
 /* Tidy up lists and improve readability */

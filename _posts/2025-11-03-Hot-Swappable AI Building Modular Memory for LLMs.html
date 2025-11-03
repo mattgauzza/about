@@ -1,0 +1,193 @@
+---
+title: "Hot-Swappable AI: Building Modular Memory for LLMs"
+date: 2025-11-03
+layout: post
+excerpt: "I set out to see if a model could learn something new without retraining. The result is a working prototype
+that uses virtual tokens and LoRA adapters to hot-swap micro-models in real time through a Streamlit interface."
+tags:
+- AI
+- Flan-T5
+- LoRA
+- Streamlit
+- Machine Learning
+- Research
+- Modular AI
+- Makers Journey
+---
+<!-- Use the UMD build so `mermaid.initialize` is available on the global object and runs reliably -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+  /* Initialize Mermaid with a dark-friendly theme and explicit themeVariables.
+     Using the UMD script ensures `mermaid` is available globally when this runs. */
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      background: 'transparent',
+      primaryColor: '#2b2b2b',
+      primaryTextColor: '#e6f3f3',
+      lineColor: '#cfdfe0',
+      textColor: '#e6f3f3',
+      nodeBorder: '#cfdfe0',
+      clusterBkg: '#262626',
+      clusterBorder: '#cfdfe0'
+    }
+  });
+</script>
+<style>
+  /* Page code block background (keep your dark pre style) */
+  pre {
+    background-color: #111;
+    /* slightly darker for better contrast with mermaid */
+    padding: 1em;
+    overflow-x: auto;
+    border-radius: 6px;
+  }
+
+  code {
+    font-family: monospace;
+  }
+
+  /* Mermaid overrides to ensure shapes, text and edges are visible on dark backgrounds.
+     These rules provide higher contrast than the previous version. */
+  .mermaid {
+    background: transparent;
+  }
+
+  /* Node shapes: subtle near-transparent fill and clearer border */
+  .mermaid .node rect,
+  .mermaid .node circle,
+  .mermaid .node ellipse,
+  .mermaid .cluster rect {
+    fill: rgba(230, 243, 243, 0.03) !important;
+    stroke: rgba(223, 238, 241, 0.36) !important;
+  }
+
+  /* Node text */
+  .mermaid .node text,
+  .mermaid .label {
+    fill: #e6f3f3 !important;
+  }
+
+  /* Edge paths / arrows and labels */
+  .mermaid .edgePath path,
+  .mermaid .edgeLabel text,
+  .mermaid marker {
+    stroke: #e6f3f3 !important;
+    fill: #e6f3f3 !important;
+  }
+
+  /* Make lines thicker and fully opaque for readability */
+  .mermaid .edgePath path {
+    stroke-width: 1.6px !important;
+    opacity: 1 !important;
+  }
+</style>
+
+
+<div class="container my-5">
+  <p>I set out to see if an AI model could “think” it already knew something—without retraining it. That curiosity
+    turned into a full-blown experiment using <strong>virtual tokens</strong>, <strong>LoRA adapters</strong>, and a
+    <strong>Streamlit interface</strong> that lets me hot-swap micro-models at runtime. What started as an exploration
+    of model memory evolved into a working proof-of-concept for modular cognition.
+  </p>
+
+  <h2>The Initial Question</h2>
+  <p>Retrieval-Augmented Generation (RAG) works well for many tasks, but it always feels reactive. Each question
+    starts fresh, context is reloaded, and nothing really “sticks.” I wanted to know if a model could <em>retain</em>
+    new understanding through small injections of data—like installing micro-memories—without retraining or bloating
+    the base model.</p>
+
+  <h2>Phase 0: Virtual Tokens Prototype</h2>
+  <p>The first idea was to inject learnable virtual tokens directly into the embedding layer. Each set of tokens
+    represented a document or domain, like a company policy or HR handbook. I used GPT-4 to generate small Q&A
+    training pairs and trained these tokens alongside the model. Even with limited GPU power, the model began to
+    respond differently depending on which tokens were loaded. The signal was subtle but consistent enough to prove
+    the concept.</p>
+  <pre><code class="language-python">
+# Virtual token embedding
+class VirtualTokenEmbedder(nn.Module):
+    def __init__(self, num_tokens=20, hidden_size=768):
+        super().__init__()
+        self.embeddings = nn.Parameter(torch.randn(num_tokens, hidden_size))
+
+    def forward(self, input_embeds):
+        return torch.cat([self.embeddings.unsqueeze(0), input_embeds], dim=1)
+    </code></pre>
+
+  <h2>Phase 0.5: LayerPool and Streamlit Interface</h2>
+  <p>Upgrading to Flan-T5-base allowed me to build a Streamlit-based control panel with sliders and toggles for
+    mounting/unmounting layers, adjusting blend weights, and seeing results live. The <code>LayerPool</code> class
+    blended multiple “memory” sources, giving each layer a distinct identity. At this stage, the idea felt alive: each
+    small adapter could be turned on or off, effectively changing the model’s “personality” or knowledge domain at
+    runtime.</p>
+  <pre><code class="language-python">
+# Blend LoRA and virtual token layers
+class LayerPool:
+    def __init__(self):
+        self.layers = {}
+
+    def mount(self, name, layer):
+        self.layers[name] = layer
+
+    def forward(self, x):
+        for layer in self.layers.values():
+            x = layer(x)
+        return x
+    </code></pre>
+
+  <h2>Phase 1: LoRA Adapters</h2>
+  <p>To increase conditioning strength, I integrated LoRA adapters using the PEFT library. Each adapter was trained on
+    a small domain dataset—HR, Tech, or Healthcare—and can be hot-swapped dynamically without retraining the base
+    model. Combined with virtual tokens, this created a modular system with semantic (embedding) and structural (LoRA)
+    memory components.</p>
+  <pre><code class="language-python">
+# Load adapters dynamically
+from peft import PeftModel
+
+base_model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-base")
+adapter = PeftModel.from_pretrained(base_model, "./models/hr_adapter")
+adapter.eval()
+    </code></pre>
+
+  <h2>System Architecture Overview</h2>
+  <p>Here’s a simplified visualization of how the base model, virtual tokens, and LoRA adapters interact:</p>
+  <div class="mermaid">
+    graph TD
+    A[User Input] --> B[Base Model Embeddings]
+    B --> C{Virtual Tokens Active?}
+    C -->|Yes| D[Prepend Virtual Tokens]
+    C -->|No| B
+    D --> E[LayerPool: Apply LoRA Adapters]
+    B --> E
+    E --> F[Seq2Seq Decoder]
+    F --> G[Output Response]
+  </div>
+
+  <h2>Results So Far</h2>
+  <ul>
+    <li>Virtual tokens condition the model at runtime.</li>
+    <li>LoRA adapters can be hot-swapped without breaking inference.</li>
+    <li>Cross-domain reasoning works in small tests (e.g., HR + Tech).</li>
+    <li>Latency is low enough for live interaction via Streamlit.</li>
+  </ul>
+
+  <h2>Challenges and Bottlenecks</h2>
+  <p>The main bottleneck is GPU power. Training multiple adapters on a local machine takes hours, so larger-scale
+    experiments are paused until I can move to cloud GPUs. Retrieval systems added little over direct adapter
+    conditioning, so the focus remains on modular memory injection.</p>
+
+  <h2>Next Steps</h2>
+  <ul>
+    <li>Validate adapter accuracy across domains (HR, Tech, Healthcare).</li>
+    <li>Experiment with persistent memory and FAISS indexing for scalability.</li>
+    <li>Explore cross-adapter reasoning—mixing multiple domains at once.</li>
+    <li>Optimize LoRA training or replace with embedding-based virtual conditioning.</li>
+  </ul>
+
+  <h2>In Closing</h2>
+  <p>Maybe the future of AI isn’t just bigger models. Maybe it’s smaller ones that can learn, connect, and work
+    together. This project started as curiosity and grew into a working prototype for runtime-conditioned
+    intelligence. The model doesn’t just retrieve information—it mounts new understanding dynamically, a small but
+    meaningful step toward adaptable AI systems.</p>
+</div>
