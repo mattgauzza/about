@@ -1,0 +1,16 @@
+// Export (forward) the project's SCSS variables, mixins and small partials
+// This file is the first safe step in migrating to the Sass module system.
+// We will `@forward` local partials here and then `@use` this forwarder
+// from the entrypoint `assets/main.scss`.
+
+@forward "variables";
+@forward "syntax-highlighting";
+@forward "timeline";
+
+// NOTE:
+// - This forwarder exposes the project's variables/mixins/functions under
+//   the current module namespace by default. In `assets/main.scss` we will
+//   `@use "../_sass/exports" as *;` (relative resolution will be handled by
+//   the Sass loader) so the exported symbols are available unprefixed.
+// - This is intentionally conservative: we'll migrate partials one-at-a-time
+//   after this is green to avoid breaking third-party vendor code.
